@@ -34,14 +34,16 @@ const Login = (props) => {
     }
 
     return (
-        <div className='w-full text-center'>
+        <div className='w-96 m-auto text-center border border-blue-300 rounded-lg p-20'>
             <h1>Log In</h1>
             <form className='flex flex-col' onSubmit={handleSubmit}>
-                <input className='border border-blue-300 rounded m-1' type="text" placeholder="Email" name="email" onChange={handleChange} />
-                <input className='border border-blue-300 rounded m-1' type="password" placeholder="Password" name="password" onChange={handleChange} />
-                <button className='border border-blue-300 rounded m-1' type="submit">Log In</button>
+                <h1 className='text-left mx-2 mt-2 px-1'>email</h1>
+                <input className='border border-blue-300 rounded mx-2 mb-2 p-1' type="text" placeholder="smith@example.com" name="email" onChange={handleChange} />
+                <h1 className='text-left mx-2 mt-2 px-1'>password</h1>
+                <input className='border border-blue-300 rounded m-2 p-1' type="password" placeholder="********" name="password" onChange={handleChange} />
+                <button className='border border-blue-300 rounded m-2 p-1' type="submit">Log In</button>
             </form>
-            <button className='' onClick={() => props.onFormSwitch('register')}>Don't have an account? Register here.</button>
+            <button className='text-xs' onClick={() => props.onFormSwitch('register')}>Don't have an account? Register here.</button>
             {user.error && <h4 className='text-red-700'>{user.error}</h4>}
         </div>
     )

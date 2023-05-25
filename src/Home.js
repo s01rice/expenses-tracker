@@ -21,11 +21,11 @@ function Home(props) {
     if (signInCheckResult.signedIn === true) {
         return <Logout />
     } else {
-        return <>
+        return <div className="w-max inline">
             {
                 currentForm === "login" ? <Login onFormSwitch={toggleForm} /> : <Signup onFormSwitch={toggleForm} />
             }
-        </>
+        </div>
 
     }
 }
