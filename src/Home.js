@@ -1,7 +1,7 @@
 import Signup from "./Signup";
 import Login from "./Login";
-import Logout from "./Logout";
-import { useUser, useSigninCheck } from "reactfire";
+import Profile from "./Profile";
+import { useSigninCheck } from "reactfire";
 import React, { useState } from "react";
 
 function Home(props) {
@@ -19,9 +19,11 @@ function Home(props) {
     }
 
     if (signInCheckResult.signedIn === true) {
-        return <Logout />
+        return <div className="w-full flex h-screen">
+            <Profile />
+        </div>
     } else {
-        return <div className="w-max inline">
+        return <div className="w-full flex h-screen">
             {
                 currentForm === "login" ? <Login onFormSwitch={toggleForm} /> : <Signup onFormSwitch={toggleForm} />
             }

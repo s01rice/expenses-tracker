@@ -11,7 +11,7 @@ const Logout = () => {
 
     return (
         <>
-            <button className='border border-blue-300 rounded m-1' type="button" onClick={handleClick}>Log Out</button>
+            <button className='border border-blue-300 rounded m-2 py-1 px-4 transition ease-in-out hover:text-white hover:bg-sky-400 duration-100' type="button" onClick={handleClick}>Log Out</button>
         </>
     )
 };
