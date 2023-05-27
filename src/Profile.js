@@ -16,7 +16,7 @@ function Profile() {
 
     console.log(auth);
     return <>
-        <div id='container' className="w-5/6 max-w-screen-xl m-auto p-12 border border-blue-300 rounded-3xl flex flex-col bg-sky-50 shadow-lg">
+        <div id='container' className="w-2/3 max-w-screen-xl m-auto p-12 border border-blue-300 rounded-3xl flex flex-col bg-sky-50 shadow-lg">
             <div id="header" className="flex justify-between">
                 <div id="profile-name" className="flex flex-col mx-8">
                     <h2 className="text-lg text-gray-400">Welcome back!</h2>
