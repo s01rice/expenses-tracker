@@ -6,7 +6,13 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Features
 
-Login, register, adding/deleting transactions will update the database and total expenses live.
+Switch between Login and Register screens.
+
+![Login screen](/public/sample0.PNG)
+
+Add and delete transactions with a sleek, minimalistic look. The tables will update automatically.
+
+![Dashboard](/public/sample1.PNG)
 
 ## Planned Features
 
