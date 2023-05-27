@@ -1,13 +1,12 @@
 import { useFirestore, useUser, useFirestoreDocData } from 'reactfire'
 import { nanoid } from 'nanoid';
 import { useState, useEffect } from 'react';
-import { doc, getDoc, setDoc, collection } from 'firebase/firestore';
+import { doc, setDoc } from 'firebase/firestore';
 
 
 function Tracker() {
     const auth = useUser();
     const transactionRef = doc(useFirestore(), '/transactions', auth.data.uid);
-    // const transactionCollection = collection(useFirestore(), '/transactions');
 
     const { status, data } = useFirestoreDocData(transactionRef);
 
@@ -71,7 +70,6 @@ function Tracker() {
         })
     }
     useEffect(() => {
-        console.log('UPDATE')
         const transactionList = user.transactions;
         setUser({
             ...user,
@@ -90,7 +88,6 @@ function Tracker() {
             transactions: transactionList,
             money: transactionList.reduce((a, b) => a = a + parseFloat(b.price), 0)
         })
-        console.log(user.transactions, user.money);
     }, [status]);
 
     return (
