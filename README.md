@@ -2,6 +2,8 @@
 
 A minimal expense tracker built using ReactJS and Tailwindcss. Backend links via Firebase & Reactfire API.
 
+Preview the site [here](https://s01rice.github.io/expenses-tracker)!
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Features
