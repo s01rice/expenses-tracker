@@ -19,11 +19,11 @@ function Home(props) {
     }
 
     if (signInCheckResult.signedIn === true) {
-        return <div className="w-full flex h-screen">
+        return <div className="w-full flex h-screen bg-gradient-to-tr from-sky-600 to-cyan-400">
             <Profile />
         </div>
     } else {
-        return <div className="w-full flex h-screen">
+        return <div className="w-full flex h-screen bg-gradient-to-tr from-sky-600 to-cyan-400">
             {
                 currentForm === "login" ? <Login onFormSwitch={toggleForm} /> : <Signup onFormSwitch={toggleForm} />
             }

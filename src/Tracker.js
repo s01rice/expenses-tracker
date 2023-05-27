@@ -66,19 +66,20 @@ function Tracker() {
     }, []);
 
     return (
-        <div id="contents" className="flex flex-col m-auto">
+        <div id="contents" className="flex flex-col m-auto w-96">
             <h1 id="total" className="text-5xl">$500</h1>
-            <div id="transaction-block" className="border border-red w-96">
-                <div id="new-transaction" className="border border-red m-10">
+            <div id="transaction-block" className="bg-white rounded-lg shadow-lg">
+                <div id="new-transaction" className="m-10">
+                    <h1 className="text-lg text-center">New Transaction</h1>
                     <form className="flex flex-col">
-                        <input className='border border-blue-300 rounded-md mx-2 my-1 p-1 focus:outline-none focus:ring-1 focus:ring-sky-400'
+                        <input className='border border-blue-300 rounded-md m-2 p-1 shadow-md focus:outline-none focus:ring-1 focus:ring-sky-400'
                             placeholder="Transaction Name"
                             type="text"
                             name="transactionName"
                             value={user.transactionName}
                             onChange={handleChange} />
                         <div id="group" className="flex">
-                            <select className='border border-blue-300 rounded-md mx-2 my-1 p-1 focus:outline-none focus:ring-1 focus:ring-sky-400' name="transactionType"
+                            <select className='border border-blue-300 rounded-md m-2 p-1 shadow-md focus:outline-none focus:ring-1 focus:ring-sky-400' name="transactionType"
                                 value={user.transactionType}
                                 onChange={handleChange}>
                                 <option value="0">Type</option>
@@ -87,23 +88,23 @@ function Tracker() {
                                 <option value="gas">Gas</option>
                                 <option value="entertainment">Entertainment</option>
                             </select>
-                            <input className='w-full border border-blue-300 rounded-md mx-2 my-1 p-1 focus:outline-none focus:ring-1 focus:ring-sky-400' placeholder="Amount" type="text" name="price"
+                            <input className='w-full border border-blue-300 rounded-md m-2 p-1 shadow-md focus:outline-none focus:ring-1 focus:ring-sky-400' placeholder="Amount" type="number" pattern="^\d*(\.\d{0,2})?$" min="0" name="price"
                                 value={user.price}
                                 onChange={handleChange} />
                         </div>
-                        <button className='bg-white border border-blue-300 rounded-md mx-2 my-1 p-1 transition ease-in-out hover:text-white hover:bg-sky-400 duration-200' onClick={addNewTransaction}>Add</button>
+                        <button className='bg-white border border-blue-300 rounded-md m-2 p-1 shadow-md transition ease-in-out hover:text-white hover:bg-sky-400 duration-200' onClick={addNewTransaction}>Add</button>
                     </form>
                 </div>
 
             </div>
-            <div id="transaction-list" className="border border-slate-200 rounded-lg p-4">
-                <p>Recent Transactions</p>
+            <div id="transaction-list" className="bg-white rounded-lg shadow-lg my-6 p-4">
+                <p className="text-center text-lg">Recent Transactions</p>
                 <ul>
                     {
                         Object.keys(user.transactions).map((id) => (
-                            <li id={id} className="flex flex-row justify-between">
+                            <li id={id} className="flex flex-row mx-8 py-1 border-b-[1px]">
                                 <div>{user.transactions[id].name}</div>
-                                <span className="text-slate-500">{user.transactions[id].price}</span>
+                                <span className="text-slate-500 grow text-right">${parseFloat(user.transactions[id].price).toFixed(2)}</span>
                             </li>
                         ))
                     }
