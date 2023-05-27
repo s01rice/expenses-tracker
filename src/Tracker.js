@@ -112,8 +112,10 @@ function Tracker() {
                                 <option value="0">Type</option>
                                 <option value="rent">Rent</option>
                                 <option value="food">Food</option>
-                                <option value="gas">Gas</option>
-                                <option value="entertainment">Entertainment</option>
+                                <option value="auto">Auto</option>
+                                <option value="utilities">Utilities</option>
+                                <option value="shopping">Shopping</option>
+                                <option value="other">Other</option>
                             </select>
                             <input className='w-full border border-blue-300 rounded-md m-2 p-1 shadow-md focus:outline-none focus:ring-1 focus:ring-sky-400' placeholder="Amount" type="number" pattern="^\d*(\.\d{0,2})?$" min="0" name="price"
                                 value={user.price}
