@@ -1,12 +1,12 @@
 import { useFirestore, useUser, useFirestoreDocData } from 'reactfire'
 import { useState, useEffect } from 'react';
-import { doc, addDoc, setDoc, collection } from 'firebase/firestore';
+import { doc, getDoc, setDoc, collection } from 'firebase/firestore';
 
 
 function Tracker() {
     const auth = useUser();
     const transactionRef = doc(useFirestore(), '/transactions', auth.data.uid);
-    const transactionCollection = collection(useFirestore(), '/transactions');
+    // const transactionCollection = collection(useFirestore(), '/transactions');
 
     const { status, data } = useFirestoreDocData(transactionRef);
 
@@ -31,18 +31,39 @@ function Tracker() {
     const addNewTransaction = (e) => {
         e.preventDefault();
         if (user.transactionName && user.transactionType && user.price) {
-            const backup = user.transactions;
-            backup.push({
-                id: backup.length + 1,
+            const transactionList = user.transactions;
+            transactionList.push({
+                id: transactionList.length + 1,
                 name: user.transactionName,
                 type: user.transactionType,
                 price: user.price,
                 user_id: user.currentUID,
             });
-            setDoc(transactionRef, { backup });
+            setDoc(transactionRef, { transactionList })
+                .then((data) => {
+                    setUser({
+                        ...user,
+                        transactions: transactionList,
+                        transactionName: '',
+                        transactionType: '',
+                        price: ''
+                    })
+                })
+                .catch((error) => {
+                    console.log('error ', error)
+                });
 
         }
     }
+
+    useEffect(() => {
+        const transactionList = data.transactionList;
+        setUser({
+            ...user,
+            transactions: transactionList
+        })
+        // console.log(transactionList);
+    }, []);
 
     return (
         <div id="contents" className="flex flex-col m-auto">
@@ -54,26 +75,38 @@ function Tracker() {
                             placeholder="Transaction Name"
                             type="text"
                             name="transactionName"
+                            value={user.transactionName}
                             onChange={handleChange} />
                         <div id="group" className="flex">
-                            <select className='border border-blue-300 rounded-md mx-2 my-1 p-1 focus:outline-none focus:ring-1 focus:ring-sky-400' name="transactionType" onChange={handleChange}>
+                            <select className='border border-blue-300 rounded-md mx-2 my-1 p-1 focus:outline-none focus:ring-1 focus:ring-sky-400' name="transactionType"
+                                value={user.transactionType}
+                                onChange={handleChange}>
                                 <option value="0">Type</option>
                                 <option value="rent">Rent</option>
                                 <option value="food">Food</option>
                                 <option value="gas">Gas</option>
                                 <option value="entertainment">Entertainment</option>
                             </select>
-                            <input className='w-full border border-blue-300 rounded-md mx-2 my-1 p-1 focus:outline-none focus:ring-1 focus:ring-sky-400' placeholder="Amount" type="text" name="price" onChange={handleChange} />
+                            <input className='w-full border border-blue-300 rounded-md mx-2 my-1 p-1 focus:outline-none focus:ring-1 focus:ring-sky-400' placeholder="Amount" type="text" name="price"
+                                value={user.price}
+                                onChange={handleChange} />
                         </div>
                         <button className='bg-white border border-blue-300 rounded-md mx-2 my-1 p-1 transition ease-in-out hover:text-white hover:bg-sky-400 duration-200' onClick={addNewTransaction}>Add</button>
                     </form>
                 </div>
 
             </div>
-            <div id="transaction-list">
+            <div id="transaction-list" className="border border-slate-200 rounded-lg p-4">
                 <p>Recent Transactions</p>
                 <ul>
-
+                    {
+                        Object.keys(user.transactions).map((id) => (
+                            <li id={id} className="flex flex-row justify-between">
+                                <div>{user.transactions[id].name}</div>
+                                <span className="text-slate-500">{user.transactions[id].price}</span>
+                            </li>
+                        ))
+                    }
                 </ul>
             </div>
         </div>
